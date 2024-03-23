@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Wedding Invitation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .aspect-ratio-18x9 {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            /* Set max-width to maintain 18:9 aspect ratio */
+            margin: 0 auto;
+            /* Center the container */
+            padding-bottom: 44.44%;
+            /* 9/18 = 0.5 * 100 = 44.44% */
+            overflow: hidden;
+            /* Hide overflowing content */
+        }
+
+        .aspect-ratio-18x9>iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-image: url('./bg/cover2.jpg');
+            /* Set background color to black */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center;
+        }
+
+        .cover-text {
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 2rem;
+            position: absolute;
+            top: 20px;
+        }
+
+        .guest-name {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .guests-info {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .click-text {
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aspect-ratio-18x9"></div>
+    <div class="cover-text">
+        <h1 class="text-3xl font-bold">Your Name & Partner's Name</h1>
+    </div>
+    <div class="guests-info">
+        <div class="text-sm text-white mb-2">To Our Beloved Guests</div>
+        <div class="guest-name mb-10">Guest Name</div>
+        <button class="text-white p-2 mb-5" onclick="navigateToNextPage()">Click anywhere to open the invitation</button>
+    </div>
+
+    <script>
+        function navigateToNextPage() {
+            const coverPage = document.querySelector('body');
+            coverPage.classList.add('fade-out');
+            // coverPage.style.backgroundImage('./bg/cover2.jpg')
+            setTimeout(() => {
+                window.location.href = 'page2.html'; // Replace 'page2.html' with the path to your next page
+            }, 1000); // Adjust the delay as needed
+        }
+    </script>
+</body>
+
+</html>
