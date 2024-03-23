@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Wedding Invitation</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Snippet&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Courgette&display=swap"
+        rel="stylesheet">
     <style>
         .aspect-ratio-18x9 {
             position: relative;
@@ -30,6 +33,9 @@
         }
 
         body {
+            overflow: hidden; /* Ensure content outside container is hidden */
+            position: relative;
+            margin-top: -400px;
             background-image: url('./bg/cover1.jpg');
             /* Set background color to black */
             height: 100vh;
@@ -41,6 +47,31 @@
             background-repeat: no-repeat;
             background-attachment: scroll;
             background-position: center;
+            font-family: "Snippet", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            /* -webkit-animation: slide 0.5s forwards; */
+            animation: slide 1.5s forwards, fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes slide {
+            100% {
+                margin-top: 0;
+            }
         }
 
         @media only screen and (max-width: 600px) {
@@ -49,15 +80,15 @@
             }
         }
 
-        body::before {
+        /* body::before { */
+        .transparent-overlay {
             content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Adjust transparency here */
-            //z-index: 1; /* Ensure the overlay is above other content */
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .cover-text {
@@ -67,6 +98,9 @@
             font-size: 1.5rem;
             position: absolute;
             top: 20px;
+            font-family: "Courgette", cursive;
+            font-weight: 100;
+            font-style: normal;
         }
 
         .guest-name {
@@ -93,26 +127,41 @@
 
 <body>
     <div class="aspect-ratio-18x9"></div>
+    <div class="transparent-overlay"></div>
     <div class="cover-text">
-        <h1 class="text-3xl font-bold">Your Name & Partner's Name</h1>
+        <div class="font-serif text-sm text-slate-400 mb-2">The Wedding of</div>
+        <h1 class="text-3xl font-bold">Dilan & Winny</h1>
     </div>
     <div class="guests-info">
         <div class="text-sm text-white mb-2">To Our Beloved Guests</div>
         <div class="guest-name mb-10">Guest Name</div>
         <button class="text-white border-2 animate-bounce border-indigo-200 rounded-xl p-2 mb-5"
             onclick="navigateToNextPage()">
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>Klik untuk membuka undangan
+            <i class="fa fa-envelope-o" aria-hidden="true"></i> Klik untuk membuka undangan
         </button>
     </div>
 
     <script>
         function navigateToNextPage() {
             const coverPage = document.querySelector('body');
-            coverPage.classList.add('fade-out');
-            coverPage.style.backgroundImage = './bg/cover2.jpg'
+            const img = './bg/cover2.jpg'
+            // coverPage.classList.add('fade-out');
+            // coverPage.style.backgroundImage = "url('./bg/cover2.jpg')"
+            // setTimeout(() => {
+            //     window.location.href = 'page2.html'; // Replace 'page2.html' with the path to your next page
+            // }, 1000); // Adjust the delay as needed
+            coverPage.style.transition = 'opacity 0.5s';
+            coverPage.style.opacity = '0.3';
+
+            // Change background image after fading out
             setTimeout(() => {
-                window.location.href = 'page2.html'; // Replace 'page2.html' with the path to your next page
-            }, 1000); // Adjust the delay as needed
+                coverPage.style.backgroundImage = `url(${img})`;
+
+                // Fade in the coverPage back to opacity 1
+                // setTimeout(() => {
+                coverPage.style.opacity = '1';
+                // }, 500); // Adjust this timeout to match the transition duration
+            }, 500);
         }
     </script>
 </body>
